@@ -1,0 +1,167 @@
+<div class="app-shell">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        ✚
+      </div>
+
+      <div>
+        <h1>VetCare Web</h1>
+        <p>Gestión veterinaria</p>
+      </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">⌂</span>
+        <span>Inicio</span>
+      </a>
+
+
+      @if (
+        esAdministrador ||
+        esRecepcionista
+      ) {
+
+        <a
+          routerLink="/propietarios"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="nav-icon">👥</span>
+          <span>Propietarios</span>
+        </a>
+
+
+        <a
+          routerLink="/mascotas"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="nav-icon">🐾</span>
+          <span>Mascotas</span>
+        </a>
+
+
+        <a
+          routerLink="/citas"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="nav-icon">▣</span>
+          <span>Citas</span>
+        </a>
+
+      }
+
+
+      @if (
+        esAdministrador ||
+        esVeterinario
+      ) {
+
+        <a
+          routerLink="/atenciones"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="nav-icon">✚</span>
+          <span>Atenciones</span>
+        </a>
+
+
+        <a
+          routerLink="/historial"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="nav-icon">▤</span>
+          <span>Historial</span>
+        </a>
+
+      }
+
+
+      @if (esAdministrador) {
+
+        <a
+          routerLink="/reportes"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="nav-icon">▥</span>
+          <span>Reportes</span>
+        </a>
+
+
+        <a
+          routerLink="/administracion"
+          routerLinkActive="active"
+          class="nav-item"
+        >
+          <span class="nav-icon">⚙</span>
+          <span>Administración</span>
+        </a>
+
+      }
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      @if (usuario) {
+
+        <div class="user-info">
+
+          <div class="user-avatar">
+            {{ inicialUsuario }}
+          </div>
+
+          <div class="user-data">
+
+            <strong>
+              {{ usuario.nombre }}
+            </strong>
+
+            <span>
+              {{ usuario.rol }}
+            </span>
+
+          </div>
+
+        </div>
+
+      }
+
+
+      <button
+        type="button"
+        class="logout-button"
+        (click)="cerrarSesion()"
+      >
+        Cerrar sesión
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <main class="main-content">
+
+    <router-outlet></router-outlet>
+
+  </main>
+
+</div>

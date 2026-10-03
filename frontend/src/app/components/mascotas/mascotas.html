@@ -1,0 +1,113 @@
+<div class="mascotas-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Mascotas</h1>
+      <p>Gestión de mascotas registradas en VetCare Web.</p>
+    </div>
+
+    <a
+      routerLink="/mascotas/nueva"
+      class="primary-button"
+    >
+      + Nueva mascota
+    </a>
+
+  </div>
+
+  <section class="content-card">
+
+    <div class="toolbar">
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          [(ngModel)]="busqueda"
+          placeholder="Buscar por nombre, propietario o especie"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Mascota</th>
+            <th>Especie</th>
+            <th>Raza</th>
+            <th>Sexo</th>
+            <th>Edad</th>
+            <th>Propietario</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (mascota of mascotas; track mascota.id) {
+
+            <tr>
+
+              <td>
+                <strong>{{ mascota.nombre }}</strong>
+              </td>
+
+              <td>{{ mascota.especie }}</td>
+
+              <td>{{ mascota.raza }}</td>
+
+              <td>{{ mascota.sexo }}</td>
+
+              <td>
+                {{ mascota.edad }}
+                {{ mascota.edad === 1 ? 'año' : 'años' }}
+              </td>
+
+              <td>{{ mascota.propietario }}</td>
+
+              <td>
+
+                <a
+                  [routerLink]="[
+                    '/mascotas',
+                    mascota.id,
+                    'editar'
+                  ]"
+                  class="action-button"
+                >
+                  Editar
+                </a>
+
+              </td>
+
+            </tr>
+
+          }
+
+          @if (mascotas.length === 0) {
+
+            <tr>
+              <td colspan="7" class="empty-message">
+                No se encontraron mascotas.
+              </td>
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>

@@ -1,0 +1,328 @@
+<div class="atenciones-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Atenciones</h1>
+      <p>
+        Consulte la agenda y registre las atenciones veterinarias.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- AGENDA -->
+
+  <section class="content-card agenda-card">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Agenda de citas</h2>
+        <p>
+          Seleccione una cita para registrar la atención.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Mascota</th>
+            <th>Propietario</th>
+            <th>Motivo</th>
+            <th>Veterinario</th>
+            <th>Acción</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (cita of citasAgenda; track cita.id) {
+
+            <tr>
+
+              <td>
+                {{ formatearFecha(cita.fecha) }}
+              </td>
+
+              <td>
+                {{ cita.hora }}
+              </td>
+
+              <td>
+                <strong>
+                  {{ cita.mascota }}
+                </strong>
+              </td>
+
+              <td>
+                {{ cita.propietario }}
+              </td>
+
+              <td>
+                {{ cita.motivo }}
+              </td>
+
+              <td>
+                {{ cita.veterinario }}
+              </td>
+
+              <td>
+
+                <button
+                  type="button"
+                  class="action-button"
+                  (click)="seleccionarCita(cita)"
+                >
+                  Atender
+                </button>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (citasAgenda.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="7"
+                class="empty-message"
+              >
+                No existen citas disponibles en la agenda.
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- REGISTRO DE ATENCIÓN -->
+
+  <section class="content-card form-card">
+
+    <div class="section-header">
+
+      <div>
+        <h2>Registrar atención</h2>
+        <p>
+          Complete la información correspondiente a la atención veterinaria.
+        </p>
+      </div>
+
+    </div>
+
+
+    <form
+      class="attention-form"
+      (ngSubmit)="guardar()"
+    >
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>
+            Mascota
+          </label>
+
+          <input
+            type="text"
+            name="mascota"
+            [(ngModel)]="atencion.mascota"
+            readonly
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Propietario
+          </label>
+
+          <input
+            type="text"
+            name="propietario"
+            [(ngModel)]="atencion.propietario"
+            readonly
+          />
+
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>
+            Fecha
+          </label>
+
+          <input
+            type="text"
+            name="fecha"
+            [value]="formatearFecha(atencion.fecha)"
+            placeholder="DD/MM/AAAA"
+            readonly
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Hora
+          </label>
+
+          <input
+            type="time"
+            name="hora"
+            [(ngModel)]="atencion.hora"
+            readonly
+          />
+
+        </div>
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>
+            Veterinario
+          </label>
+
+          <input
+            type="text"
+            name="veterinario"
+            [(ngModel)]="atencion.veterinario"
+            readonly
+          />
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Motivo de la cita
+          </label>
+
+          <input
+            type="text"
+            name="motivo"
+            [(ngModel)]="atencion.motivo"
+            readonly
+          />
+
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="observaciones">
+          Observaciones de la atención
+        </label>
+
+        <textarea
+          id="observaciones"
+          name="observaciones"
+          [(ngModel)]="atencion.observaciones"
+          rows="4"
+          placeholder="Ingrese las observaciones de la atención"
+          required
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="indicaciones">
+          Indicaciones
+        </label>
+
+        <textarea
+          id="indicaciones"
+          name="indicaciones"
+          [(ngModel)]="atencion.indicaciones"
+          rows="4"
+          placeholder="Ingrese las indicaciones correspondientes"
+          required
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="limpiar()"
+        >
+          Limpiar
+        </button>
+
+
+        @if (atencion.mascota) {
+
+          <a
+            [routerLink]="[
+              '/historial',
+              atencion.mascotaId
+            ]"
+            class="history-button"
+          >
+            Ver historial
+          </a>
+
+        }
+
+
+        <button
+          type="submit"
+          class="primary-button"
+        >
+          Registrar atención
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+</div>

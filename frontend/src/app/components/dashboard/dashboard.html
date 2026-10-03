@@ -1,0 +1,224 @@
+<div class="dashboard-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Panel principal</h1>
+      <p>Resumen general de la gestión veterinaria.</p>
+    </div>
+
+    <div class="current-date">
+      VetCare Web
+    </div>
+
+  </div>
+
+
+  <section class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        👥
+      </div>
+
+      <div>
+
+        <span class="summary-label">
+          Propietarios
+        </span>
+
+        <strong>
+          {{ totalPropietarios }}
+        </strong>
+
+        <small>
+          registrados
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        🐾
+      </div>
+
+      <div>
+
+        <span class="summary-label">
+          Mascotas
+        </span>
+
+        <strong>
+          {{ totalMascotas }}
+        </strong>
+
+        <small>
+          registradas
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        ▣
+      </div>
+
+      <div>
+
+        <span class="summary-label">
+          Citas de hoy
+        </span>
+
+        <strong>
+          {{ totalCitasHoy }}
+        </strong>
+
+        <small>
+          pendientes de atención
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-icon">
+        ✚
+      </div>
+
+      <div>
+
+        <span class="summary-label">
+          Atenciones
+        </span>
+
+        <strong>
+          {{ totalAtencionesHoy }}
+        </strong>
+
+        <small>
+          registradas hoy
+        </small>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="appointments-section">
+
+    <div class="section-header">
+
+      <div>
+
+        <h2>Próximas citas</h2>
+
+        <p>
+          Citas veterinarias pendientes de atención para el día.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Hora</th>
+            <th>Mascota</th>
+            <th>Propietario</th>
+            <th>Motivo</th>
+            <th>Veterinario</th>
+            <th>Estado</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (cita of citasDeHoy; track cita.id) {
+
+            <tr>
+
+              <td>
+                {{ cita.hora }}
+              </td>
+
+              <td>
+                <strong>
+                  {{ cita.mascota }}
+                </strong>
+              </td>
+
+              <td>
+                {{ cita.propietario }}
+              </td>
+
+              <td>
+                {{ cita.motivo }}
+              </td>
+
+              <td>
+                {{ cita.veterinario }}
+              </td>
+
+              <td>
+
+                <span
+                  class="status"
+                  [class.confirmed]="cita.estado === 'Confirmada'"
+                  [class.pending]="cita.estado === 'Pendiente'"
+                >
+                  {{ cita.estado }}
+                </span>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (citasDeHoy.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="6"
+                class="empty-message"
+              >
+                No hay citas pendientes de atención para hoy.
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>

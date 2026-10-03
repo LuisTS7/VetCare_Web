@@ -1,0 +1,42 @@
+# ==========================================
+# VetCare Web - archivos no versionados
+# ==========================================
+
+# Angular / Node
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+frontend/.cache/
+
+# Spring Boot / Maven
+backend/target/
+
+# Variables de entorno y secretos
+.env
+.env.*
+frontend/.env
+frontend/.env.*
+backend/.env
+backend/.env.*
+
+# Configuraciones locales con secretos
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp

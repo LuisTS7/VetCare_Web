@@ -1,0 +1,132 @@
+<div class="form-page">
+
+  <div class="page-header">
+    <div>
+
+      <h1>
+        {{ esEdicion ? 'Editar propietario' : 'Nuevo propietario' }}
+      </h1>
+
+      <p>
+        {{
+          esEdicion
+            ? 'Actualice la información del propietario.'
+            : 'Registre la información del propietario de la mascota.'
+        }}
+      </p>
+
+    </div>
+  </div>
+
+  <section class="form-card">
+
+    <form
+      class="owner-form"
+      (ngSubmit)="guardar()"
+    >
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="dni">
+            DNI
+          </label>
+
+          <input
+            type="text"
+            id="dni"
+            name="dni"
+            [(ngModel)]="propietario.dni"
+            maxlength="8"
+            placeholder="Ingrese el DNI"
+            required
+          />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="nombres">
+            Nombres y apellidos
+          </label>
+
+          <input
+            type="text"
+            id="nombres"
+            name="nombres"
+            [(ngModel)]="propietario.nombres"
+            placeholder="Ingrese nombres y apellidos"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="telefono">
+            Teléfono
+          </label>
+
+          <input
+            type="text"
+            id="telefono"
+            name="telefono"
+            [(ngModel)]="propietario.telefono"
+            placeholder="Ingrese el teléfono"
+            required
+          />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="correo">
+            Correo electrónico
+          </label>
+
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            [(ngModel)]="propietario.correo"
+            placeholder="Ingrese el correo electrónico"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button"
+        >
+          {{
+            esEdicion
+              ? 'Guardar cambios'
+              : 'Guardar propietario'
+          }}
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+</div>

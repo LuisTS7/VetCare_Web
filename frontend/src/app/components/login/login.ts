@@ -1,0 +1,4 @@
+import { Component } from '@angular/core'; import { FormsModule } from '@angular/forms'; import { Router } from '@angular/router'; import { AuthService } from '../../services/auth';
+@Component({selector:'app-login',imports:[FormsModule],templateUrl:'./login.html',styleUrl:'./login.css'})
+export class Login{correo='';password='';mensajeError='';procesando=false;constructor(private authService:AuthService,private router:Router){}
+ async iniciarSesion():Promise<void>{this.mensajeError='';if(!this.correo.trim()||!this.password.trim()){this.mensajeError='Ingrese su correo y contraseña.';return;}this.procesando=true;const ok=await this.authService.iniciarSesion(this.correo,this.password);this.procesando=false;if(!ok){this.mensajeError='Correo o contraseña incorrectos.';return;}await this.router.navigate(['/dashboard']);}}

@@ -1,0 +1,301 @@
+<div class="citas-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Citas</h1>
+
+      <p>
+        Programación y seguimiento de citas veterinarias.
+      </p>
+    </div>
+
+    <a
+      routerLink="/citas/nueva"
+      class="primary-button"
+    >
+      + Programar cita
+    </a>
+
+  </div>
+
+
+  <section class="filters-card">
+
+    <div class="filter-group">
+
+      <label for="fechaFiltro">
+        Fecha
+      </label>
+
+      <div
+        style="
+          position: relative;
+          width: 100%;
+        "
+      >
+
+        <input
+          type="text"
+          id="fechaFiltro"
+          name="fechaFiltro"
+          [(ngModel)]="fechaFiltro"
+          (input)="formatearFechaFiltro()"
+          placeholder="DD/MM/AAAA"
+          maxlength="10"
+          inputmode="numeric"
+          autocomplete="off"
+          style="
+            width: 100%;
+            box-sizing: border-box;
+            padding-right: 44px;
+          "
+        />
+
+        <span
+          style="
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            pointer-events: none;
+          "
+        >
+          📅
+        </span>
+
+        <input
+          type="date"
+          (change)="seleccionarFechaFiltro($any($event.target).value)"
+          tabindex="-1"
+          aria-label="Seleccionar fecha"
+          style="
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            opacity: 0;
+            cursor: pointer;
+          "
+        />
+
+      </div>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label for="veterinarioFiltro">
+        Veterinario
+      </label>
+
+      <select
+        id="veterinarioFiltro"
+        [(ngModel)]="veterinarioFiltro"
+      >
+
+        <option value="">
+          Todos
+        </option>
+
+        @for (veterinario of veterinarios; track veterinario) {
+          <option [value]="veterinario">
+            {{ veterinario }}
+          </option>
+        }
+
+      </select>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label for="estadoFiltro">
+        Estado
+      </label>
+
+      <select
+        id="estadoFiltro"
+        [(ngModel)]="estadoFiltro"
+      >
+
+        <option value="">
+          Todos
+        </option>
+
+        <option value="Pendiente">
+          Pendiente
+        </option>
+
+        <option value="Confirmada">
+          Confirmada
+        </option>
+
+        <option value="Atendida">
+          Atendida
+        </option>
+
+        <option value="Cancelada">
+          Cancelada
+        </option>
+
+      </select>
+
+    </div>
+
+  </section>
+
+
+  <section class="table-card">
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Mascota</th>
+            <th>Propietario</th>
+            <th>Motivo</th>
+            <th>Veterinario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          @for (cita of citas; track cita.id) {
+
+            <tr>
+
+              <td>
+                {{ formatearFecha(cita.fecha) }}
+              </td>
+
+              <td>
+                {{ cita.hora }}
+              </td>
+
+              <td>
+                <strong>
+                  {{ cita.mascota }}
+                </strong>
+              </td>
+
+              <td>
+                {{ cita.propietario }}
+              </td>
+
+              <td>
+                {{ cita.motivo }}
+              </td>
+
+              <td>
+                {{ cita.veterinario }}
+              </td>
+
+              <td>
+
+                <span
+                  class="status-badge"
+                  [class.confirmed]="cita.estado === 'Confirmada'"
+                  [class.pending]="cita.estado === 'Pendiente'"
+                  [class.attended]="cita.estado === 'Atendida'"
+                  [class.cancelled]="cita.estado === 'Cancelada'"
+                >
+                  {{ cita.estado }}
+                </span>
+
+              </td>
+
+
+              <td>
+
+                <div class="actions">
+
+                  @if (
+                    cita.estado !== 'Cancelada' &&
+                    cita.estado !== 'Atendida'
+                  ) {
+
+                    <a
+                      [routerLink]="[
+                        '/citas',
+                        cita.id,
+                        'reprogramar'
+                      ]"
+                      class="action-button edit"
+                    >
+                      Reprogramar
+                    </a>
+
+                    <button
+                      type="button"
+                      class="action-button cancel"
+                      (click)="cancelarCita(cita.id)"
+                    >
+                      Cancelar
+                    </button>
+
+                  }
+
+                  @if (cita.estado === 'Atendida') {
+
+                    <span class="completed-text">
+                      Atención registrada
+                    </span>
+
+                  }
+
+                  @if (cita.estado === 'Cancelada') {
+
+                    <span class="cancelled-text">
+                      Cita cancelada
+                    </span>
+
+                  }
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (citas.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="8"
+                class="empty-message"
+              >
+                No se encontraron citas.
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</div>

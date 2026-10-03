@@ -1,0 +1,169 @@
+:host {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f3447;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mascotas-page {
+  padding: 30px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #16344d;
+}
+
+.page-header p {
+  margin: 8px 0 0;
+  color: #718096;
+  font-size: 14px;
+}
+
+.primary-button {
+  border: none;
+  background: #159a9c;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: #128789;
+}
+
+.content-card {
+  background: #ffffff;
+  border: 1px solid #e8edf2;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(13, 43, 69, 0.05);
+  overflow: hidden;
+}
+
+.toolbar {
+  padding: 20px 22px;
+  border-bottom: 1px solid #e8edf2;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 420px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid #dce3e9;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.search-box span {
+  color: #8393a1;
+  font-size: 18px;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: #455b6d;
+  background: transparent;
+}
+
+.search-box input::placeholder {
+  color: #9aa7b3;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+thead {
+  background: #f8fafc;
+}
+
+th {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #607080;
+  border-bottom: 1px solid #e8edf2;
+}
+
+td {
+  padding: 16px 18px;
+  font-size: 13px;
+  color: #455b6d;
+  border-bottom: 1px solid #eef2f5;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: #fbfcfd;
+}
+
+td strong {
+  color: #1f3447;
+}
+
+.action-button {
+  border: 1px solid #159a9c;
+  background: #ffffff;
+  color: #159a9c;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background: #e8f7f7;
+}
+
+@media (max-width: 700px) {
+  .mascotas-page {
+    padding: 20px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+
+  .search-box {
+    max-width: none;
+  }
+}

@@ -1,0 +1,489 @@
+<div class="reportes-page">
+
+  <div class="page-header">
+
+    <div>
+      <h1>Reportes</h1>
+      <p>
+        Indicadores generales de la gestión de VetCare Web.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- RESUMEN GENERAL -->
+
+  <section class="stats-grid">
+
+    <article class="stat-card">
+
+      <div class="stat-icon">
+        P
+      </div>
+
+      <div>
+
+        <span class="stat-label">
+          Propietarios
+        </span>
+
+        <strong class="stat-value">
+          {{ totalPropietarios }}
+        </strong>
+
+        <span class="stat-description">
+          Registrados
+        </span>
+
+      </div>
+
+    </article>
+
+
+    <article class="stat-card">
+
+      <div class="stat-icon">
+        M
+      </div>
+
+      <div>
+
+        <span class="stat-label">
+          Mascotas
+        </span>
+
+        <strong class="stat-value">
+          {{ totalMascotas }}
+        </strong>
+
+        <span class="stat-description">
+          Registradas
+        </span>
+
+      </div>
+
+    </article>
+
+
+    <article class="stat-card">
+
+      <div class="stat-icon">
+        C
+      </div>
+
+      <div>
+
+        <span class="stat-label">
+          Citas
+        </span>
+
+        <strong class="stat-value">
+          {{ totalCitas }}
+        </strong>
+
+        <span class="stat-description">
+          Registradas
+        </span>
+
+      </div>
+
+    </article>
+
+
+    <article class="stat-card">
+
+      <div class="stat-icon">
+        A
+      </div>
+
+      <div>
+
+        <span class="stat-label">
+          Atenciones
+        </span>
+
+        <strong class="stat-value">
+          {{ totalAtenciones }}
+        </strong>
+
+        <span class="stat-description">
+          Registradas
+        </span>
+
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <div class="reports-grid">
+
+
+    <!-- ESTADO DE CITAS -->
+
+    <section class="report-card">
+
+      <div class="card-header">
+
+        <div>
+
+          <h2>
+            Estado de citas
+          </h2>
+
+          <p>
+            Distribución de las citas registradas.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="status-list">
+
+
+        <!-- CONFIRMADAS -->
+
+        <div class="status-item">
+
+          <div class="status-info">
+
+            <div>
+
+              <span
+                class="status-dot confirmed"
+              ></span>
+
+              <strong>
+                Confirmadas
+              </strong>
+
+            </div>
+
+            <span>
+              {{ citasConfirmadas }}
+              ({{ porcentajeConfirmadas }}%)
+            </span>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar confirmed"
+              [style.width.%]="porcentajeConfirmadas"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- PENDIENTES -->
+
+        <div class="status-item">
+
+          <div class="status-info">
+
+            <div>
+
+              <span
+                class="status-dot pending"
+              ></span>
+
+              <strong>
+                Pendientes
+              </strong>
+
+            </div>
+
+            <span>
+              {{ citasPendientes }}
+              ({{ porcentajePendientes }}%)
+            </span>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar pending"
+              [style.width.%]="porcentajePendientes"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ATENDIDAS -->
+
+        <div class="status-item">
+
+          <div class="status-info">
+
+            <div>
+
+              <span
+                class="status-dot attended"
+              ></span>
+
+              <strong>
+                Atendidas
+              </strong>
+
+            </div>
+
+            <span>
+              {{ citasAtendidas }}
+              ({{ porcentajeAtendidas }}%)
+            </span>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar attended"
+              [style.width.%]="porcentajeAtendidas"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- CANCELADAS -->
+
+        <div class="status-item">
+
+          <div class="status-info">
+
+            <div>
+
+              <span
+                class="status-dot cancelled"
+              ></span>
+
+              <strong>
+                Canceladas
+              </strong>
+
+            </div>
+
+            <span>
+              {{ citasCanceladas }}
+              ({{ porcentajeCanceladas }}%)
+            </span>
+
+          </div>
+
+
+          <div class="progress">
+
+            <div
+              class="progress-bar cancelled"
+              [style.width.%]="porcentajeCanceladas"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RESUMEN -->
+
+    <section class="report-card">
+
+      <div class="card-header">
+
+        <div>
+
+          <h2>
+            Resumen general
+          </h2>
+
+          <p>
+            Información consolidada del sistema.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-list">
+
+        <div class="summary-row">
+
+          <span>
+            Propietarios registrados
+          </span>
+
+          <strong>
+            {{ totalPropietarios }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Mascotas registradas
+          </span>
+
+          <strong>
+            {{ totalMascotas }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Citas registradas
+          </span>
+
+          <strong>
+            {{ totalCitas }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Atenciones registradas
+          </span>
+
+          <strong>
+            {{ totalAtenciones }}
+          </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+          <span>
+            Citas activas
+          </span>
+
+          <strong>
+            {{ citasActivas }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- INDICADORES -->
+
+  <section class="report-card detail-card">
+
+    <div class="card-header">
+
+      <div>
+
+        <h2>
+          Indicadores de citas
+        </h2>
+
+        <p>
+          Resumen según el estado actual de las citas.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="indicator-grid">
+
+      <div class="indicator">
+
+        <span>
+          Total
+        </span>
+
+        <strong>
+          {{ totalCitas }}
+        </strong>
+
+      </div>
+
+
+      <div class="indicator">
+
+        <span>
+          Confirmadas
+        </span>
+
+        <strong>
+          {{ citasConfirmadas }}
+        </strong>
+
+      </div>
+
+
+      <div class="indicator">
+
+        <span>
+          Pendientes
+        </span>
+
+        <strong>
+          {{ citasPendientes }}
+        </strong>
+
+      </div>
+
+
+      <div class="indicator">
+
+        <span>
+          Atendidas
+        </span>
+
+        <strong>
+          {{ citasAtendidas }}
+        </strong>
+
+      </div>
+
+
+      <div class="indicator">
+
+        <span>
+          Canceladas
+        </span>
+
+        <strong>
+          {{ citasCanceladas }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

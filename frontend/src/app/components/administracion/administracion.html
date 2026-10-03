@@ -1,0 +1,272 @@
+<div class="administracion-page">
+
+  <div class="page-header">
+
+    <div>
+
+      <h1>Administración</h1>
+
+      <p>
+        Gestión de usuarios y roles de acceso a VetCare Web.
+      </p>
+
+    </div>
+
+    <a
+      routerLink="/administracion/usuarios/nuevo"
+      class="primary-button"
+    >
+      + Nuevo usuario
+    </a>
+
+  </div>
+
+
+  <!-- USUARIOS -->
+
+  <section class="content-card">
+
+    <div class="section-header">
+
+      <div>
+
+        <h2>Usuarios del sistema</h2>
+
+        <p>
+          Usuarios autorizados para acceder a VetCare Web.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="toolbar">
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          type="text"
+          [(ngModel)]="busqueda"
+          placeholder="Buscar por nombre o correo"
+        />
+
+      </div>
+
+
+      <div class="role-filter">
+
+        <label for="rolFiltro">
+          Rol
+        </label>
+
+        <select
+          id="rolFiltro"
+          [(ngModel)]="rolFiltro"
+        >
+
+          <option value="">
+            Todos
+          </option>
+
+          <option value="Administrador">
+            Administrador
+          </option>
+
+          <option value="Recepcionista">
+            Recepcionista
+          </option>
+
+          <option value="Médico veterinario">
+            Médico veterinario
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Usuario</th>
+            <th>Correo electrónico</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          @for (usuario of usuarios; track usuario.id) {
+
+            <tr>
+
+              <td>
+                <strong>
+                  {{ usuario.nombres }}
+                </strong>
+              </td>
+
+              <td>
+                {{ usuario.correo }}
+              </td>
+
+              <td>
+
+                <span class="role-badge">
+                  {{ usuario.rol }}
+                </span>
+
+              </td>
+
+              <td>
+
+                <span
+                  class="status-badge"
+                  [class.active]="usuario.estado === 'Activo'"
+                  [class.inactive]="usuario.estado === 'Inactivo'"
+                >
+                  {{ usuario.estado }}
+                </span>
+
+              </td>
+
+              <td>
+
+                <a
+                  [routerLink]="[
+                    '/administracion/usuarios/editar',
+                    usuario.id,
+                  ]"
+                  class="action-button"
+                >
+                  Editar
+                </a>
+
+              </td>
+
+            </tr>
+
+          }
+
+
+          @if (usuarios.length === 0) {
+
+            <tr>
+
+              <td
+                colspan="5"
+                class="empty-message"
+              >
+                No se encontraron usuarios.
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- ROLES -->
+
+  <section class="roles-section">
+
+    <div class="roles-header">
+
+      <h2>Roles del sistema</h2>
+
+      <p>
+        Perfiles definidos según las funciones de los usuarios.
+      </p>
+
+    </div>
+
+
+    <div class="roles-grid">
+
+
+      <article class="role-card">
+
+        <div class="role-icon">
+          A
+        </div>
+
+        <div>
+
+          <h3>
+            Administrador
+          </h3>
+
+          <p>
+            Gestiona usuarios, roles y consulta la información general del sistema.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="role-card">
+
+        <div class="role-icon">
+          R
+        </div>
+
+        <div>
+
+          <h3>
+            Recepcionista
+          </h3>
+
+          <p>
+            Gestiona propietarios, mascotas y programación de citas veterinarias.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="role-card">
+
+        <div class="role-icon">
+          V
+        </div>
+
+        <div>
+
+          <h3>
+            Médico veterinario
+          </h3>
+
+          <p>
+            Consulta su agenda, registra atenciones y revisa el historial de las mascotas.
+          </p>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+</div>

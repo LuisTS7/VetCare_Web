@@ -1,0 +1,4 @@
+import { Component,OnInit } from '@angular/core';import { FormsModule } from '@angular/forms';import { RouterLink } from '@angular/router';import { Usuario,UsuariosService } from '../../services/usuarios';
+@Component({selector:'app-administracion',imports:[FormsModule,RouterLink],templateUrl:'./administracion.html',styleUrl:'./administracion.css'})
+export class Administracion implements OnInit{busqueda='';rolFiltro='';constructor(private usuariosService:UsuariosService){}ngOnInit(){this.usuariosService.cargar().subscribe({error:()=>alert('No se pudieron cargar los usuarios.')});}
+ get usuarios():Usuario[]{const t=this.busqueda.trim().toLowerCase();return this.usuariosService.obtenerTodos().filter(u=>(!t||u.nombres.toLowerCase().includes(t)||u.correo.toLowerCase().includes(t))&&(!this.rolFiltro||u.rol===this.rolFiltro));}}

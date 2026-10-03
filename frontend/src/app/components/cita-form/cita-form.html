@@ -1,0 +1,257 @@
+<div class="form-page">
+
+  <div class="page-header">
+
+    <div>
+
+      <h1>
+        {{ esReprogramacion ? 'Reprogramar cita' : 'Programar cita' }}
+      </h1>
+
+      <p>
+        {{
+          esReprogramacion
+            ? 'Modifique la fecha, hora o información necesaria de la cita.'
+            : 'Registre la información para programar una nueva cita veterinaria.'
+        }}
+      </p>
+
+    </div>
+
+  </div>
+
+  <section class="form-card">
+
+    <form
+      class="appointment-form"
+      (ngSubmit)="guardar()"
+    >
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="mascota">
+            Mascota
+          </label>
+
+          <select
+            id="mascota"
+            name="mascota"
+            [(ngModel)]="cita.mascota"
+            (ngModelChange)="seleccionarMascota()"
+            required
+          >
+
+            <option value="">
+              Seleccione una mascota
+            </option>
+
+            @for (mascota of mascotas; track mascota.id) {
+
+              <option [value]="mascota.nombre">
+                {{ mascota.nombre }} - {{ mascota.propietario }}
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="propietario">
+            Propietario
+          </label>
+
+          <input
+            type="text"
+            id="propietario"
+            name="propietario"
+            [(ngModel)]="cita.propietario"
+            readonly
+          />
+
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="fecha">
+            Fecha
+          </label>
+
+          <div
+            style="
+              position: relative;
+              width: 100%;
+            "
+          >
+
+            <input
+              type="text"
+              id="fecha"
+              name="fecha"
+              [(ngModel)]="fechaVisual"
+              (input)="formatearFechaVisual()"
+              placeholder="DD/MM/AAAA"
+              maxlength="10"
+              inputmode="numeric"
+              autocomplete="off"
+              required
+              style="
+                width: 100%;
+                box-sizing: border-box;
+                padding-right: 44px;
+              "
+            />
+
+            <span
+              style="
+                position: absolute;
+                right: 12px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 18px;
+                pointer-events: none;
+              "
+            >
+              📅
+            </span>
+
+            <input
+              type="date"
+              (change)="seleccionarFechaCalendario($any($event.target).value)"
+              tabindex="-1"
+              aria-label="Seleccionar fecha"
+              style="
+                position: absolute;
+                right: 6px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 34px;
+                height: 34px;
+                opacity: 0;
+                cursor: pointer;
+              "
+            />
+
+          </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="hora">
+            Hora
+          </label>
+
+          <input
+            type="time"
+            id="hora"
+            name="hora"
+            [(ngModel)]="cita.hora"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="veterinario">
+            Veterinario
+          </label>
+
+          <select
+            id="veterinario"
+            name="veterinario"
+            [(ngModel)]="cita.veterinario"
+            required
+          >
+
+            <option value="">
+              Seleccione un veterinario
+            </option>
+
+            @for (veterinario of veterinarios; track veterinario.id) {
+              <option [value]="veterinario.nombres">
+                {{ veterinario.nombres }}
+              </option>
+            }
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="estado">
+            Estado
+          </label>
+
+          <select
+            id="estado"
+            name="estado"
+            [(ngModel)]="cita.estado"
+          >
+            <option value="Pendiente">Pendiente</option>
+            <option value="Confirmada">Confirmada</option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="motivo">
+          Motivo de la cita
+        </label>
+
+        <input
+          type="text"
+          id="motivo"
+          name="motivo"
+          [(ngModel)]="cita.motivo"
+          placeholder="Ingrese el motivo de la cita"
+          required
+        />
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button"
+        >
+          {{
+            esReprogramacion
+              ? 'Guardar reprogramación'
+              : 'Programar cita'
+          }}
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+</div>

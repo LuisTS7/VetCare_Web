@@ -1,0 +1,208 @@
+<div class="form-page">
+
+  <div class="page-header">
+
+    <div>
+
+      <h1>
+        {{ esEdicion ? 'Editar mascota' : 'Nueva mascota' }}
+      </h1>
+
+      <p>
+        {{
+          esEdicion
+            ? 'Actualice la información de la mascota.'
+            : 'Registre la información de la mascota y asóciela con su propietario.'
+        }}
+      </p>
+
+    </div>
+
+  </div>
+
+  <section class="form-card">
+
+    <form
+      class="pet-form"
+      (ngSubmit)="guardar()"
+    >
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="nombre">
+            Nombre de la mascota
+          </label>
+
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            [(ngModel)]="mascota.nombre"
+            placeholder="Ingrese el nombre"
+            required
+          />
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="propietario">
+            Propietario
+          </label>
+
+          <select
+            id="propietario"
+            name="propietario"
+            [(ngModel)]="mascota.propietario"
+            required
+          >
+
+            <option value="">
+              Seleccione un propietario
+            </option>
+
+            @for (propietario of propietarios; track propietario.id) {
+
+              <option [value]="propietario.nombres">
+                {{ propietario.nombres }} - DNI {{ propietario.dni }}
+              </option>
+
+            }
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="especie">
+            Especie
+          </label>
+
+          <select
+            id="especie"
+            name="especie"
+            [(ngModel)]="mascota.especie"
+            required
+          >
+
+            <option value="">
+              Seleccione la especie
+            </option>
+
+            <option value="Canino">
+              Canino
+            </option>
+
+            <option value="Felino">
+              Felino
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="raza">
+            Raza
+          </label>
+
+          <input
+            type="text"
+            id="raza"
+            name="raza"
+            [(ngModel)]="mascota.raza"
+            placeholder="Ingrese la raza"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label for="sexo">
+            Sexo
+          </label>
+
+          <select
+            id="sexo"
+            name="sexo"
+            [(ngModel)]="mascota.sexo"
+            required
+          >
+
+            <option value="">
+              Seleccione el sexo
+            </option>
+
+            <option value="Macho">
+              Macho
+            </option>
+
+            <option value="Hembra">
+              Hembra
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="edad">
+            Edad
+          </label>
+
+          <input
+            type="number"
+            id="edad"
+            name="edad"
+            [(ngModel)]="mascota.edad"
+            min="0"
+            placeholder="Ingrese la edad"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button"
+        >
+          {{
+            esEdicion
+              ? 'Guardar cambios'
+              : 'Guardar mascota'
+          }}
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+</div>

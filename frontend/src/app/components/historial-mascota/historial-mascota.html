@@ -1,0 +1,285 @@
+<div class="history-page">
+
+  <div class="page-header">
+
+    <div>
+
+      <h1>
+        Historial de atención
+      </h1>
+
+      <p>
+        Consulte las atenciones veterinarias
+        registradas de cada mascota.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <section class="history-card">
+
+
+    <div class="card-header">
+
+      <div>
+
+        <h2>
+          Seleccionar mascota
+        </h2>
+
+        <p>
+          Elija una mascota para consultar
+          sus atenciones veterinarias.
+        </p>
+
+      </div>
+
+
+      <select
+        [value]="mascotaId"
+        (change)="cambiarMascota($event)"
+      >
+
+        <option value="0">
+          Seleccione una mascota
+        </option>
+
+
+        @for (
+          mascota of mascotas;
+          track mascota.id
+        ) {
+
+          <option
+            [value]="mascota.id"
+          >
+
+            {{ mascota.nombre }}
+            -
+            {{ mascota.propietario }}
+
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+
+    @if (mascotaId > 0) {
+
+
+      <div class="card-header">
+
+        <div>
+
+          <h2>
+            {{ nombreMascota }}
+          </h2>
+
+          <p>
+            Historial veterinario
+            de la mascota.
+          </p>
+
+        </div>
+
+
+        <span>
+
+          {{ historial.length }}
+
+          {{
+            historial.length === 1
+              ? 'atención registrada'
+              : 'atenciones registradas'
+          }}
+
+        </span>
+
+      </div>
+
+
+      @if (
+        historial.length > 0
+      ) {
+
+
+        <div class="history-list">
+
+
+          @for (
+            atencion of historial;
+            track atencion.id
+          ) {
+
+
+            <article
+              class="history-item"
+            >
+
+
+              <div
+                class="history-top"
+              >
+
+
+                <div>
+
+                  <h3>
+                    {{ atencion.motivo }}
+                  </h3>
+
+                  <p>
+
+                    {{ atencion.fecha }}
+
+                    ·
+
+                    {{ atencion.hora }}
+
+                  </p>
+
+                </div>
+
+
+                <span
+                  class="vet-badge"
+                >
+
+                  {{
+                    atencion.veterinario
+                  }}
+
+                </span>
+
+
+              </div>
+
+
+              <div
+                class="history-data"
+              >
+
+
+                <div
+                  class="data-block"
+                >
+
+                  <span
+                    class="label"
+                  >
+                    Propietario
+                  </span>
+
+                  <p>
+                    {{
+                      atencion.propietario
+                    }}
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="data-block"
+                >
+
+                  <span
+                    class="label"
+                  >
+                    Observaciones
+                  </span>
+
+                  <p>
+                    {{
+                      atencion.observaciones
+                    }}
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="data-block"
+                >
+
+                  <span
+                    class="label"
+                  >
+                    Indicaciones
+                  </span>
+
+                  <p>
+                    {{
+                      atencion.indicaciones
+                    }}
+                  </p>
+
+                </div>
+
+
+              </div>
+
+
+            </article>
+
+
+          }
+
+
+        </div>
+
+
+      } @else {
+
+
+        <div
+          class="empty-history"
+        >
+
+          <h3>
+            Sin atenciones registradas
+          </h3>
+
+          <p>
+            Esta mascota todavía
+            no cuenta con registros
+            en su historial.
+          </p>
+
+        </div>
+
+
+      }
+
+
+    } @else {
+
+
+      <div
+        class="empty-history"
+      >
+
+        <h3>
+          Seleccione una mascota
+        </h3>
+
+        <p>
+          Elija una mascota para
+          consultar su historial
+          veterinario.
+        </p>
+
+      </div>
+
+
+    }
+
+
+  </section>
+
+</div>

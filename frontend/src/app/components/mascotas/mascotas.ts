@@ -1,0 +1,3 @@
+import { Component,OnInit } from '@angular/core';import { FormsModule } from '@angular/forms';import { RouterLink } from '@angular/router';import { Mascota,MascotasService } from '../../services/mascotas';
+@Component({imports:[FormsModule,RouterLink],selector:'app-mascotas',styleUrl:'./mascotas.css',templateUrl:'./mascotas.html'})
+export class Mascotas implements OnInit{busqueda='';constructor(private mascotasService:MascotasService){}ngOnInit(){this.mascotasService.cargar().subscribe();}get mascotas():Mascota[]{const t=this.busqueda.trim().toLowerCase();const a=this.mascotasService.obtenerTodos();return !t?a:a.filter(m=>m.nombre.toLowerCase().includes(t)||m.propietario.toLowerCase().includes(t)||m.especie.toLowerCase().includes(t));}}

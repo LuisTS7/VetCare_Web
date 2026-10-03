@@ -1,0 +1,22 @@
+/* Base compartida de todas las pantallas. */
+html, body { margin: 0; min-height: 100%; }
+body { font-family: Arial, Helvetica, sans-serif; background: #f4f7fa; }
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Ajustar las páginas al espacio real que queda junto al menú. */
+.main-content .page-header { flex-wrap: wrap; gap: 16px; }
+.main-content .page-header > * { min-width: 0; }
+.main-content .table-container,
+.main-content .table-wrapper { max-width: 100%; overflow-x: auto; }
+
+@container content (max-width: 800px) {
+  .main-content [class$="-page"] { padding: 20px; }
+  .main-content .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .main-content .summary-card { min-width: 0; padding: 16px; gap: 12px; }
+}
+
+@container content (max-width: 480px) {
+  .main-content [class$="-page"] { padding: 16px; }
+  .main-content .page-header { flex-direction: column; align-items: flex-start; }
+  .main-content .summary-grid { grid-template-columns: minmax(0, 1fr); }
+}
